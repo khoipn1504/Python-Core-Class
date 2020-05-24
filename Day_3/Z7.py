@@ -7,4 +7,6 @@ for i in range(0,lstAB[0]):
         row.append(i*j)
     ans.append(row)
 
-print(ans)
+for i in range(len(ans)):
+    a='\t'.join(str(x)for x in ans[i])+'\n'
+    print(a)
