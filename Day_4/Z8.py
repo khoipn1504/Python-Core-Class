@@ -1,32 +1,35 @@
 from random import randint
-class KhachHang():
-    def __init__(self,maKH='',tenKH='',gioiTinh=''):
-        self.maKH=maKH
-        self.tenKH=tenKH
-        self.gioiTinh=gioiTinh
 
-        self.level=0
-        self.isActive=False
-    
-    
+
+class KhachHang():
+    def __init__(self, maKH='', tenKH='', gioiTinh=''):
+        self.maKH = maKH
+        self.tenKH = tenKH
+        self.gioiTinh = gioiTinh
+
+        self.level = 0
+        self.isActive = False
+
     def __repr__(self):
         return str(self.level)
 
     def nhapInfo(self):
-        self.maKH=input('Nhập vào mã KH: ')
-        self.tenKH=input('Nhập vào tên KH: ')
-        self.gioiTinh=input('Nhập vào gioi tinh: ')
-    
+        self.maKH = input('Nhập vào mã KH: ')
+        self.tenKH = input('Nhập vào tên KH: ')
+        self.gioiTinh = input('Nhập vào gioi tinh: ')
+
     def layThongTin(self):
-        print('MSKH là %s, ten KH là %s, giới tính là %s, level %s và đã kích hoạt: %s'%(self.maKH,self.tenKH,self.gioiTinh,self.level,self.isActive))
+        print('MSKH là %s, ten KH là %s, giới tính là %s, level %s và đã kích hoạt: %s' % (
+            self.maKH, self.tenKH, self.gioiTinh, self.level, self.isActive))
+
 
 def SortKHByLv(khList):
-    khGroup=khList.copy()
-    if len(khGroup) <2:
+    khGroup = khList.copy()
+    if len(khGroup) < 2:
         return khGroup
-    pivot=khGroup.pop()
-    lowLV=[]
-    highLV=[]
+    pivot = khGroup.pop()
+    lowLV = []
+    highLV = []
     for kh in khGroup:
         if kh.level < pivot.level:
             lowLV.append(kh)
@@ -34,17 +37,22 @@ def SortKHByLv(khList):
             highLV.append(kh)
     return SortKHByLv(lowLV)+[pivot]+SortKHByLv(highLV)
 
+
 def themKh(khGroup):
-    kh=KhachHang()
+    kh = KhachHang()
     kh.nhapInfo()
-    kh.level=randint(1,10)
+    kh.level = randint(1, 10)
     khGroup.append(kh)
 
-def xoaKH(khGroup,MSKH):
-    
+
+def xoaKH(khGroup, MSKH):
+    for idx, kh in enumerate(khGroup):
+        if kh.maKH == MSKH:
+            del khGroup[idx]
+
 
 if __name__ == "__main__":
-    khGroup=[]
+    khGroup = []
     # sll=int(input('Số lượng khách hàng cần nhập: '))
 
     # for i in range(sll):
@@ -54,15 +62,17 @@ if __name__ == "__main__":
     #     khGroup.append(kh)
 
     while True:
-        userorder=input(r'Bạn muốn gì (add,delete,show):')
-        if userorder=='quit':
+        userorder = input(r'Bạn muốn gì (add,delete,show):')
+        if userorder == 'quit':
             break
-        if userorder=='add':
+        if userorder == 'add':
             themKh(khGroup)
-        elif userorder=='show':
-            for i in khGroup:
-                i.layThongTin()
-        elif userorder=='delete':
-
-
-
+        elif userorder == 'show':
+            if khGroup:
+                for i in khGroup:
+                    i.layThongTin()
+            else:
+                print('Không có Kh')
+        elif userorder == 'delete':
+            idKH = input('Nhập id khách hàng cần xóa: ')
+            xoaKH(khGroup, idKH)
