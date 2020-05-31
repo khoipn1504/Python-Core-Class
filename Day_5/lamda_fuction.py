@@ -15,4 +15,4 @@ def myFilter(songuyen):
 songuyen = [1, 2, 3, 4, 5, 6, 7, 8]
 filtered = list(filter(lambda a: a % 2 == 0, songuyen))
 print(myFilter(songuyen))
-
+print(filtered)
