@@ -17,9 +17,9 @@ connection = pyodbc.connect('DRIVER={SQL Server};SERVER=' +
 cursor = connection.cursor()
 
 
-def AddHocVien(a, b, c, d, e, f, g):
+def AddHocVien(*info):
     sql = "INSERT INTO HOC_VIEN VALUES(?,?,?,?,?,?,?)"
-    val = (a, b, c, d, e, f, g)
+    val = info
     cursor.execute(sql, val)
     connection.commit()
     print("record inserted.")
